@@ -9,9 +9,9 @@ import { Category } from 'src/app/model/Category';
 })
 export class CategoriesComponent implements OnInit {
 
-  constructor(private dataHandler: DataHandlerService) { }
-
   categories: Category[]
+
+  constructor(private dataHandler: DataHandlerService) { }
 
   ngOnInit(): void {
     this.categories = this.dataHandler.getCategories()
