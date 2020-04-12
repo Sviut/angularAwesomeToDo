@@ -3,6 +3,7 @@ import {Task} from "../../model/Task";
 import {DataHandlerService} from "../../service/data-handler.service";
 import {MatTableDataSource} from "@angular/material/table";
 
+
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
@@ -29,9 +30,14 @@ export class TasksComponent implements OnInit {
   }
 
   getPriorityColor(task: Task) {
+    if (task.completed) {
+      return '#F8F9FA'
+    }
+
     if (task.priority && task.priority.color) {
       return task.priority.color
     }
+
     return '#fff'
   }
 
