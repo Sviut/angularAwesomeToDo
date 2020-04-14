@@ -8,7 +8,7 @@ import {Category} from 'src/app/model/Category';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-  
+
   @Input()
   private categories: Category[]
 
