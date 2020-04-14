@@ -4,6 +4,8 @@ import {DataHandlerService} from "../../service/data-handler.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
+import {MatDialog} from "@angular/material/dialog";
+import {EditTaskDialogComponent} from "../../dialog/edit-task-dialog/edit-task-dialog.component";
 
 
 @Component({
@@ -20,7 +22,7 @@ export class TasksComponent implements OnInit {
   @ViewChild(MatPaginator, {static: false}) private paginator: MatPaginator
   @ViewChild(MatSort, {static: false}) private sort: MatSort
 
-  private tasks: Task[]
+  tasks: Task[]
 
   @Input('tasks')
   private set setTasks(tasks: Task[]) {
@@ -31,7 +33,10 @@ export class TasksComponent implements OnInit {
   @Output()
   updateTask = new EventEmitter<Task>()
 
-  constructor(private dataHandler: DataHandlerService) {
+  constructor(
+    private dataHandler: DataHandlerService,
+    public dialog: MatDialog
+  ) {
   }
 
   ngOnInit(): void {
@@ -43,7 +48,7 @@ export class TasksComponent implements OnInit {
     task.completed = !task.completed
   }
 
-  getPriorityColor(task: Task) {
+  getPriorityColor(task: Task): string {
     if (task.completed) {
       return '#F8F9FA'
     }
@@ -55,9 +60,9 @@ export class TasksComponent implements OnInit {
     return '#fff'
   }
 
-  private fillTable() {
+  private fillTable(): void {
 
-    if(!this.dataSource) {
+    if (!this.dataSource) {
       return
     }
 
@@ -71,13 +76,13 @@ export class TasksComponent implements OnInit {
           return task.priority ? task.priority.id : null
         }
         case 'category': {
-          return  task.category ? task.category.title : null
+          return task.category ? task.category.title : null
         }
         case 'date': {
-          return  task.date ? task.date : null
+          return task.date ? task.date : null
         }
         case 'title': {
-          return  task.title
+          return task.title
         }
       }
     }
@@ -88,7 +93,12 @@ export class TasksComponent implements OnInit {
     this.dataSource.paginator = this.paginator
   }
 
-  onClickTask(task: Task) {
-    this.updateTask.emit(task)
+  openEditTaskDialog(task: Task): void {
+    const dialogRef = this.dialog.open(EditTaskDialogComponent, {data: [task, 'Редактирование задачи'],height: '400px',
+      width: '600px', autoFocus: false})
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    })
   }
 }

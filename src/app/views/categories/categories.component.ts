@@ -10,7 +10,7 @@ import {Category} from 'src/app/model/Category';
 export class CategoriesComponent implements OnInit {
 
   @Input()
-  private categories: Category[]
+  categories: Category[]
 
   @Output()
   selectCategory = new EventEmitter<Category>()
