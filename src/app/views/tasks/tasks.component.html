@@ -63,7 +63,7 @@
     <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
   </div>
 
-  <div *ngIf="tasks.length == 0">
+  <div *ngIf="tasks && tasks.length == 0">
     <p class="not-found">Ничего не найдено</p>
   </div>
 </div>
