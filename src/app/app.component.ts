@@ -8,7 +8,7 @@ import {Category} from "./model/Category";
   templateUrl: 'app.component.html',
   styleUrls: []
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'angularAwesomeToDo';
 
   tasks: Task[]
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit{
     this.selectedCategory = category
 
     this.dataHandlerService.searchTasks(
-       this.selectedCategory,
+      this.selectedCategory,
       null,
       null,
       null
@@ -39,6 +39,16 @@ export class AppComponent implements OnInit{
   }
 
   onUpdateTask(task: Task) {
-    console.log(task)
+    this.dataHandlerService.updateTask(task).subscribe(() => {
+      this.dataHandlerService.searchTasks(
+        this.selectedCategory,
+        null,
+        null,
+        null
+      ).subscribe((tasks: Task[]) => {
+        this.tasks = tasks
+      })
+    })
+
   }
 }

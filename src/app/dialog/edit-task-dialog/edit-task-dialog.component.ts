@@ -17,16 +17,25 @@ export class EditTaskDialogComponent implements OnInit {
     private dialog: MatDialog
   ) { }
 
-  private task: Task
-  private dialogTitle: string
+  task: Task
+  dialogTitle: string
+  tmpTitle: string
 
 
   ngOnInit(): void {
     this.task = this.data[0]
     this.dialogTitle = this.data[1]
 
-    console.log(this.task)
-    console.log(this.dialogTitle)
+    this.tmpTitle = this.task.title
   }
 
+  onConfirm() {
+    this.task.title = this.tmpTitle
+
+    this.dialogRef.close(this.task)
+  }
+
+  onCancel() {
+    this.dialogRef.close(null)
+  }
 }
