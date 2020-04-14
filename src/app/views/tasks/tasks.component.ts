@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, AfterViewInit, Input} from '@angular/core';
+import {Component, OnInit, ViewChild, AfterViewInit, Input, Output, EventEmitter} from '@angular/core';
 import {Task} from "../../model/Task";
 import {DataHandlerService} from "../../service/data-handler.service";
 import {MatTableDataSource} from "@angular/material/table";
@@ -27,6 +27,9 @@ export class TasksComponent implements OnInit {
     this.tasks = tasks
     this.fillTable()
   }
+
+  @Output()
+  updateTask = new EventEmitter<Task>()
 
   constructor(private dataHandler: DataHandlerService) {
   }
@@ -83,5 +86,9 @@ export class TasksComponent implements OnInit {
   private addTableObjects() {
     this.dataSource.sort = this.sort
     this.dataSource.paginator = this.paginator
+  }
+
+  onClickTask(task: Task) {
+    this.updateTask.emit(task)
   }
 }

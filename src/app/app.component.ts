@@ -37,4 +37,8 @@ export class AppComponent implements OnInit{
       this.tasks = tasks
     })
   }
+
+  onUpdateTask(task: Task) {
+    console.log(task)
+  }
 }
