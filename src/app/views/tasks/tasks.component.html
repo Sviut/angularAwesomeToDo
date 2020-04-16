@@ -33,7 +33,7 @@
             *matCellDef="let task"
             [ngClass]="{'completed': task.completed, 'novalue': !task.date}"
             mat-cell>
-          {{task.date | date: 'medium'}}
+          {{task.date | taskDate}}
         </td>
       </ng-container>
 

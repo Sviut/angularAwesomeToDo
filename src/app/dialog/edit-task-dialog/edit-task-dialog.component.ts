@@ -29,8 +29,7 @@ export class EditTaskDialogComponent implements OnInit {
   tmpTitle: string
   tmpCategory: Category
   tmpPriority: Priority
-  picker: any;
-  tmpDate: any;
+  tmpDate: Date;
 
 
   ngOnInit(): void {
@@ -49,6 +48,7 @@ export class EditTaskDialogComponent implements OnInit {
     this.task.title = this.tmpTitle
     this.task.category = this.tmpCategory
     this.task.priority = this.tmpPriority
+    this.task.date = this.tmpDate
 
     this.dialogRef.close(this.task)
   }
