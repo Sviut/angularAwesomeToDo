@@ -11,7 +11,11 @@ export class TaskDAOArray implements TaskDAO {
   }
 
   delete(id: number): Observable<Task> {
-    return undefined;
+    console.log(TestData.tasks.length)
+    const tmpTask = TestData.tasks.find(t => t.id === id)
+    TestData.tasks.splice(TestData.tasks.indexOf(tmpTask), 1)
+    console.log(TestData.tasks.length)
+    return of(tmpTask)
   }
 
   get(id: number): Observable<Task> {
