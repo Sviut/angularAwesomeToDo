@@ -29,6 +29,8 @@ export class EditTaskDialogComponent implements OnInit {
   tmpTitle: string
   tmpCategory: Category
   tmpPriority: Priority
+  picker: any;
+  tmpDate: any;
 
 
   ngOnInit(): void {

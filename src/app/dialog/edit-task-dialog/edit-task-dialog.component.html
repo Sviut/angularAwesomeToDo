@@ -47,6 +47,31 @@
     </mat-select>
   </mat-form-field>
 
+  <mat-form-field>
+
+    <input
+      matInput placeholder="Укажите скрок выполнения" #inputDate
+      readonly
+      [matDatepicker]="picker"
+      [(ngModel)]="tmpDate"
+
+      (click)="picker.open()"
+    >
+
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+
+    <mat-datepicker #picker></mat-datepicker>
+
+    <button
+      *ngIf="inputDate.value.trim().length"
+      mat-button matSuffix mat-icon-button aria-label="Clear" class="size25"
+      (click)="tmpDate = null"
+      >
+      <mat-icon>clear</mat-icon>
+    </button>
+
+  </mat-form-field>
+
 </mat-dialog-content>
 
 
