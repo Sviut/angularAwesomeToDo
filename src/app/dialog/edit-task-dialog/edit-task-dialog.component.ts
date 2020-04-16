@@ -18,7 +18,8 @@ export class EditTaskDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: [Task, string],
     private dataHandler: DataHandlerService,
     private dialog: MatDialog
-  ) { }
+  ) {
+  }
 
   categories: Category[]
   priorities: Priority[]
@@ -65,9 +66,17 @@ export class EditTaskDialogComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result) {
+      if (result) {
         this.dialogRef.close('delete')
       }
     })
+  }
+
+  complete() {
+    this.dialogRef.close('complete')
+  }
+
+  activate() {
+    this.dialogRef.close('activate')
   }
 }
