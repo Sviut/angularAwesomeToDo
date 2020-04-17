@@ -7,6 +7,7 @@ import {MatSort} from "@angular/material/sort";
 import {MatDialog} from "@angular/material/dialog";
 import {EditTaskDialogComponent} from "../../dialog/edit-task-dialog/edit-task-dialog.component";
 import {ConfirmDialogComponent} from "../../dialog/confirm-dialog/confirm-dialog.component";
+import {Category} from "../../model/Category";
 
 
 @Component({
@@ -36,6 +37,9 @@ export class TasksComponent implements OnInit {
 
   @Output()
   deleteTask = new EventEmitter<Task>()
+
+  @Output()
+  selectCategory = new EventEmitter<Category>()
 
   constructor(
     private dataHandler: DataHandlerService,
@@ -146,5 +150,7 @@ export class TasksComponent implements OnInit {
   }
 
 
-
+  onSelectCategory(category: Category) {
+    this.selectCategory.emit(category)
+  }
 }
