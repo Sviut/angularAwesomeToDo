@@ -17,7 +17,7 @@ import {ConfirmDialogComponent} from "../../dialog/confirm-dialog/confirm-dialog
 export class TasksComponent implements OnInit {
 
 
-  displayedColumns: string[] = ['color', 'id', 'title', 'date', 'priority', 'category', 'operations']
+  displayedColumns: string[] = ['color', 'id', 'title', 'date', 'priority', 'category', 'operations', 'select']
   dataSource: MatTableDataSource<Task>
 
   @ViewChild(MatPaginator, {static: false}) private paginator: MatPaginator

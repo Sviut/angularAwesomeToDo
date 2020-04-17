@@ -72,6 +72,19 @@
         </td>
       </ng-container>
 
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td class="col-select text-right" mat-cell *matCellDef="let task">
+          <mat-checkbox
+            (click)="$event.stopPropagation()"
+            (change)="$event ? onToggleTaskCompleted(task) : null"
+            [checked]="task.completed"
+          >
+
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
       <tr *matHeaderRowDef="displayedColumns;" mat-header-row></tr>
       <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
     </table>
