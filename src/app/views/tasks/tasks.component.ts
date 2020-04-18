@@ -47,8 +47,8 @@ export class TasksComponent implements OnInit {
   @Output()
   filterByStatus = new EventEmitter<boolean>()
 
-  searchTaskText: string;
-  selectedStatusFilter: any;
+  searchTaskText: string = ''
+  selectedStatusFilter: boolean = null
 
   constructor(
     public dialog: MatDialog
