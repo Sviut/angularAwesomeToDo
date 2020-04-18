@@ -41,6 +41,11 @@ export class TasksComponent implements OnInit {
   @Output()
   selectCategory = new EventEmitter<Category>()
 
+  @Output()
+  filterByTitle = new EventEmitter<string>()
+
+  searchTaskText: string;
+
   constructor(
     private dataHandler: DataHandlerService,
     public dialog: MatDialog
@@ -152,5 +157,9 @@ export class TasksComponent implements OnInit {
 
   onSelectCategory(category: Category) {
     this.selectCategory.emit(category)
+  }
+
+  onFilterByTitle() {
+    this.filterByTitle.emit(this.searchTaskText)
   }
 }
