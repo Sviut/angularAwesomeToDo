@@ -49,9 +49,23 @@ export class TaskDAOArray implements TaskDAO {
   private searchTodos(category: Category, searchText: string, status: boolean, priority: Priority) {
    let allTask = TestData.tasks
 
-   if(category) {
-     allTask = allTask.filter(todo => todo.category === category)
+   if(category != null) {
+     allTask = allTask.filter(task => task.category === category)
    }
+
+   if(status != null) {
+     allTask = allTask.filter(task => task.completed === status)
+   }
+
+    if(priority != null) {
+      allTask = allTask.filter(task => task.priority === priority)
+    }
+
+    if (searchText != null) {
+      allTask = allTask.filter(task => {
+        return task.title.toUpperCase().includes(searchText.toUpperCase())
+      })
+    }
 
    return allTask
   }
