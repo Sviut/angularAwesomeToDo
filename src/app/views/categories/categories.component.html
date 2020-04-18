@@ -1,4 +1,14 @@
 <div class="sidebar" data-color="azure" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+
+  <div class="logo">
+    <span class="nav-title">Категории</span>
+    <span class="add-icon-area">
+    <button mat-icon-button class="add-icon">
+    </button>
+  </span>
+  </div>
+  <button></button>
+
   <div class="sidebar-wrapper">
     <ul class="nav">
       <li
@@ -11,7 +21,7 @@
         </a>
       </li>
 
-      <div class="line"></div>
+      <li class="line"></li>
 
       <li class="nav-item pointer"
           *ngFor="let category of categories; let index = index"

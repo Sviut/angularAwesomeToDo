@@ -1,10 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DataHandlerService} from 'src/app/service/data-handler.service';
 import {Category} from 'src/app/model/Category';
-import {EditTaskDialogComponent} from "../../dialog/edit-task-dialog/edit-task-dialog.component";
-import {Task} from "../../model/Task";
-import {EditCategoryDialogComponent} from "../../dialog/edit-category-dialog/edit-category-dialog.component";
-import {MatDialog} from "@angular/material/dialog";
+import {EditCategoryDialogComponent} from '../../dialog/edit-category-dialog/edit-category-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-categories',
@@ -14,19 +12,19 @@ import {MatDialog} from "@angular/material/dialog";
 export class CategoriesComponent implements OnInit {
 
   @Input()
-  categories: Category[]
+  categories: Category[];
 
   @Output()
-  selectCategory = new EventEmitter<Category>()
+  selectCategory = new EventEmitter<Category>();
 
   @Output()
-  updateCategory = new EventEmitter<Category>()
+  updateCategory = new EventEmitter<Category>();
 
   @Output()
-  deleteCategory = new EventEmitter<Category>()
+  deleteCategory = new EventEmitter<Category>();
 
   @Input()
-  selectedCategory: Category
+  selectedCategory: Category;
 
   indexMouseMove: number;
 
@@ -37,41 +35,42 @@ export class CategoriesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
   showTaskByCategory(category: Category) {
 
     if (this.selectedCategory === category) {
-      return
+      return;
     }
 
-    this.selectedCategory = category
+    this.selectedCategory = category;
 
-    this.selectCategory.emit(this.selectedCategory)
+    this.selectCategory.emit(this.selectedCategory);
   }
 
   showEditIcon(index: number) {
-    this.indexMouseMove = index
+    this.indexMouseMove = index;
   }
 
   openEditDialog(category: Category) {
     const dialogRef = this.dialog.open(EditCategoryDialogComponent, {
       data: [category.title, 'Редактирование категории'],
       width: '400px'
-    })
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'delete') {
-        this.deleteCategory.emit(category)
-        return
+        this.deleteCategory.emit(category);
+        return;
       }
 
       if (typeof (result) === 'string') {
-        category.title = result as string
+        category.title = result as string;
 
-        this.updateCategory.emit(category)
-        return
+        this.updateCategory.emit(category);
+        return;
       }
-    })
+    });
   }
 }
