@@ -44,7 +44,11 @@ export class TasksComponent implements OnInit {
   @Output()
   filterByTitle = new EventEmitter<string>()
 
+  @Output()
+  filterByStatus = new EventEmitter<boolean>()
+
   searchTaskText: string;
+  selectedStatusFilter: any;
 
   constructor(
     public dialog: MatDialog
@@ -147,7 +151,7 @@ export class TasksComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result) {
+      if (result) {
         this.deleteTask.emit(task)
       }
     })
@@ -160,5 +164,12 @@ export class TasksComponent implements OnInit {
 
   onFilterByTitle() {
     this.filterByTitle.emit(this.searchTaskText)
+  }
+
+  onFilterByStatus(value: boolean) {
+    if (value !== this.selectedStatusFilter) {
+      this.selectedStatusFilter = value
+      this.filterByStatus.emit(this.selectedStatusFilter)
+    }
   }
 }
