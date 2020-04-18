@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, AfterViewInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, ViewChild, Input, Output, EventEmitter} from '@angular/core';
 import {Task} from "../../model/Task";
 import {DataHandlerService} from "../../service/data-handler.service";
 import {MatTableDataSource} from "@angular/material/table";
@@ -47,7 +47,6 @@ export class TasksComponent implements OnInit {
   searchTaskText: string;
 
   constructor(
-    private dataHandler: DataHandlerService,
     public dialog: MatDialog
   ) {
   }
