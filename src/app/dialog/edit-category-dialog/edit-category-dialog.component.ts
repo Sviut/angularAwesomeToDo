@@ -1,6 +1,6 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
+import {Component, Inject, OnInit} from '@angular/core'
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog'
+import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component'
 
 @Component({
   selector: 'app-edit-category-dialog',
@@ -8,9 +8,9 @@ import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component
   styleUrls: ['./edit-category-dialog.component.scss']
 })
 export class EditCategoryDialogComponent implements OnInit {
-  categoryTitle: string;
-  canDelete = true;
-  dialogTitle: string;
+  categoryTitle: string
+  canDelete = true
+  dialogTitle: string
 
   constructor(
     private dialogRef: MatDialogRef<EditCategoryDialogComponent>,
@@ -20,20 +20,20 @@ export class EditCategoryDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.categoryTitle = this.data[0];
-    this.dialogTitle = this.data[1];
+    this.categoryTitle = this.data[0]
+    this.dialogTitle = this.data[1]
 
     if (!this.categoryTitle) {
-      this.canDelete = false;
+      this.canDelete = false
     }
   }
 
   onConfirm() {
-    this.dialogRef.close(this.categoryTitle);
+    this.dialogRef.close(this.categoryTitle)
   }
 
   onCancel() {
-    this.dialogRef.close(false);
+    this.dialogRef.close(false)
   }
 
   delete() {
@@ -44,12 +44,12 @@ export class EditCategoryDialogComponent implements OnInit {
         message: `Вы действительно хотите удалить категорию "${this.categoryTitle}" ?`
       },
       autoFocus: false
-    });
+    })
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.dialogRef.close('delete');
+        this.dialogRef.close('delete')
       }
-    });
+    })
   }
 }

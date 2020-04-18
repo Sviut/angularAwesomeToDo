@@ -66,7 +66,7 @@
       *ngIf="inputDate.value.trim().length"
       mat-button matSuffix mat-icon-button aria-label="Clear" class="size25"
       (click)="tmpDate = null"
-      >
+    >
       <mat-icon>clear</mat-icon>
     </button>
 
@@ -106,13 +106,15 @@
       mat-button class="green"
       *ngIf="!task.completed"
       (click)="complete()"
-    >Завершить задачу</button>
+    >Завершить задачу
+    </button>
 
     <button
       mat-button class="green"
       *ngIf="task.completed"
       (click)="activate()"
-    >Активировать</button>
+    >Активировать
+    </button>
   </div>
 
 </mat-dialog-actions>
