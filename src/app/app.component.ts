@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Task} from "./model/Task";
 import {DataHandlerService} from "./service/data-handler.service";
 import {Category} from "./model/Category";
+import {Priority} from "./model/Priority";
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,10 @@ export class AppComponent implements OnInit {
 
   tasks: Task[]
   categories: Category[]
+  priorities: Priority[]
   selectedCategory: Category;
+
+  private priorityFilter: Priority
   private statusFilter: boolean;
   private searchTaskText: string;
 
@@ -23,8 +27,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataHandlerService.getAllTask().subscribe(tasks => this.tasks = tasks)
+    this.dataHandlerService.getAllPriorities().subscribe(priorities => this.priorities = priorities)
     this.dataHandlerService.getAllCategories().subscribe(categories => this.categories = categories)
+
+    this.onSelectCategory(null)
   }
 
   onSelectCategory(category: Category) {
@@ -68,9 +74,8 @@ export class AppComponent implements OnInit {
   }
 
   onDeleteCategory(category: Category) {
-    this.dataHandlerService.deleteCategory(category.id).subscribe(cat => {
+    this.dataHandlerService.deleteCategory(category.id).subscribe(() => {
       this.selectedCategory = null
-      debugger
       this.onSelectCategory(this.selectedCategory)
     })
   }
@@ -96,7 +101,12 @@ export class AppComponent implements OnInit {
       this.selectedCategory,
       this.searchTaskText,
       this.statusFilter,
-      null
+      this.priorityFilter
     ).subscribe(tasks => this.tasks = tasks)
+  }
+
+  onFilterTasksByPriority(priority: Priority) {
+    this.priorityFilter = priority
+    this.updateTasks()
   }
 }

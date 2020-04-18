@@ -53,6 +53,10 @@ export class TaskDAOArray implements TaskDAO {
      allTask = allTask.filter(task => task.category === category)
    }
 
+   if(priority != null) {
+     allTask = allTask.filter(task => task.priority === priority)
+   }
+
    if(status != null) {
      allTask = allTask.filter(task => task.completed === status)
    }

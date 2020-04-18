@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild, Input, Output, EventEmitter} from '@angular/core';
 import {Task} from "../../model/Task";
-import {DataHandlerService} from "../../service/data-handler.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
@@ -8,6 +7,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {EditTaskDialogComponent} from "../../dialog/edit-task-dialog/edit-task-dialog.component";
 import {ConfirmDialogComponent} from "../../dialog/confirm-dialog/confirm-dialog.component";
 import {Category} from "../../model/Category";
+import {Priority} from "../../model/Priority";
 
 
 @Component({
@@ -24,12 +24,18 @@ export class TasksComponent implements OnInit {
   @ViewChild(MatPaginator, {static: false}) private paginator: MatPaginator
   @ViewChild(MatSort, {static: false}) private sort: MatSort
 
+  priorities: Priority[]
   tasks: Task[]
 
   @Input('tasks')
   private set setTasks(tasks: Task[]) {
     this.tasks = tasks
     this.fillTable()
+  }
+
+  @Input('priorities')
+  set setPriorities(priorities: Priority[]) {
+    this.priorities = priorities
   }
 
   @Output()
@@ -45,10 +51,15 @@ export class TasksComponent implements OnInit {
   filterByTitle = new EventEmitter<string>()
 
   @Output()
+  filterByPriority = new EventEmitter<Priority>()
+
+  @Output()
   filterByStatus = new EventEmitter<boolean>()
+
 
   searchTaskText: string = ''
   selectedStatusFilter: boolean = null
+  selectedPriorityFilter: Priority;
 
   constructor(
     public dialog: MatDialog
@@ -170,6 +181,13 @@ export class TasksComponent implements OnInit {
     if (value !== this.selectedStatusFilter) {
       this.selectedStatusFilter = value
       this.filterByStatus.emit(this.selectedStatusFilter)
+    }
+  }
+
+  onFilterByPriority(value: Priority) {
+    if(value !== this.selectedPriorityFilter) {
+      this.selectedPriorityFilter = value
+      this.filterByPriority.emit(this.selectedPriorityFilter)
     }
   }
 }
