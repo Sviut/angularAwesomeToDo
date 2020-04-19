@@ -5,6 +5,7 @@ import {DataHandlerService} from '../../service/data-handler.service'
 import {Category} from '../../model/Category'
 import {Priority} from '../../model/Priority'
 import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component'
+import {OperType} from '../OperType'
 
 @Component({
   selector: 'app-edit-task-dialog',
@@ -12,10 +13,11 @@ import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component
   styleUrls: ['./edit-task-dialog.component.scss']
 })
 export class EditTaskDialogComponent implements OnInit {
+  private operType: OperType
 
   constructor(
     public dialogRef: MatDialogRef<EditTaskDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: [Task, string],
+    @Inject(MAT_DIALOG_DATA) public data: [Task, string, OperType],
     private dataHandler: DataHandlerService,
     private dialog: MatDialog
   ) {
@@ -35,6 +37,7 @@ export class EditTaskDialogComponent implements OnInit {
   ngOnInit(): void {
     this.task = this.data[0]
     this.dialogTitle = this.data[1]
+    this.operType = this.data[2]
 
     this.tmpTitle = this.task.title
     this.tmpCategory = this.task.category
@@ -62,7 +65,7 @@ export class EditTaskDialogComponent implements OnInit {
       maxWidth: '500px',
       data: {
         dialogTitle: 'Подтвердите действие',
-        message: `Вы действительно хотите удалить задачу: "${this.task.title}" ?`
+        message: `Вы действительно хотите удалить задачу: "${this.task.title}" ?`,
       },
       autoFocus: false
     })
@@ -80,5 +83,13 @@ export class EditTaskDialogComponent implements OnInit {
 
   activate() {
     this.dialogRef.close('activate')
+  }
+
+  canDelete(): boolean {
+    return this.operType === OperType.EDIT
+  }
+
+  canActivateDeactivate(): boolean {
+    return this.operType === OperType.EDIT
   }
 }

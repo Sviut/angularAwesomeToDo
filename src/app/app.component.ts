@@ -115,4 +115,14 @@ export class AppComponent implements OnInit {
       this.updateTasks()
     })
   }
+
+  onAddCategory(title: string) {
+    this.dataHandlerService.addCategory(title).subscribe(() => this.updateCategories())
+  }
+
+  private updateCategories() {
+    this.categories.forEach(cat => {
+      this.dataHandlerService.getAllCategories().subscribe(categories => this.categories = categories)
+    })
+  }
 }

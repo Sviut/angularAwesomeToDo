@@ -4,8 +4,19 @@ import {Category} from '../../../model/Category'
 import {TestData} from '../../TestData'
 
 export class CategoryDAOArray implements CategoryDAO {
-  add(T): Observable<Category> {
-    return undefined
+
+  add(category: Category): Observable<Category> {
+    if (!category) {
+      category.id = this.getLastCategoryId()
+    }
+
+    TestData.categories.push(category)
+
+    return of(category)
+  }
+
+  getLastCategoryId(): number {
+    return Math.max.apply(Math, TestData.categories.map(c => c.id)) + 1
   }
 
   delete(id: number): Observable<Category> {
