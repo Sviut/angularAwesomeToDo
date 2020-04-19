@@ -6,8 +6,17 @@ import {Priority} from '../../../model/Priority'
 import {TestData} from '../../TestData'
 
 export class TaskDAOArray implements TaskDAO {
-  add(T): Observable<Task> {
-    return undefined
+
+  private static getLastIdTask(): number {
+    return Math.max.apply(Math, TestData.tasks.map(task => task.id)) + 1
+  }
+
+  add(task: Task): Observable<Task> {
+    if (!task.id) {
+      task.id = TaskDAOArray.getLastIdTask()
+    }
+    TestData.tasks.push(task)
+    return of(task)
   }
 
   delete(id: number): Observable<Task> {

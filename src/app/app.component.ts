@@ -109,4 +109,10 @@ export class AppComponent implements OnInit {
     this.priorityFilter = priority
     this.updateTasks()
   }
+
+  onAddTask(task: Task) {
+    this.dataHandlerService.addTask(task).subscribe(() => {
+      this.updateTasks()
+    })
+  }
 }
