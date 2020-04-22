@@ -22,6 +22,9 @@ export class CategoriesComponent implements OnInit {
   updateCategory = new EventEmitter<Category>()
 
   @Output()
+  searchCategory = new EventEmitter<string>()
+
+  @Output()
   deleteCategory = new EventEmitter<Category>()
 
   @Output()
@@ -31,6 +34,7 @@ export class CategoriesComponent implements OnInit {
   selectedCategory: Category
 
   indexMouseMove: number
+  searchCategoryTitle: string
 
   constructor(
     private dataHandler: DataHandlerService,
@@ -89,5 +93,11 @@ export class CategoriesComponent implements OnInit {
       }
     })
 
+  }
+
+  search() {
+    if (this.searchCategoryTitle != null) {
+      this.searchCategory.emit(this.searchCategoryTitle)
+    }
   }
 }
