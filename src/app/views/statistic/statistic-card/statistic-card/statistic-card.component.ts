@@ -8,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core'
 export class StatisticCardComponent implements OnInit {
 
   @Input()
-  completed: false
+  completed: boolean
   @Input()
   iconName: string
   @Input()

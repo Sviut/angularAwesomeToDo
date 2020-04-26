@@ -3,6 +3,7 @@ import {Task} from './model/Task'
 import {DataHandlerService} from './service/data-handler.service'
 import {Category} from './model/Category'
 import {Priority} from './model/Priority'
+import {zip} from 'rxjs'
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,11 @@ export class AppComponent implements OnInit {
   private statusFilter: boolean
   private searchTaskText: string
   private searchCategoryText: string
+
+  totalTasksCountInCategory: number
+  completedCountInCategory: number
+  uncompletedCountInCategory: number
+  private uncompletedTotalTasksCount: number
 
   constructor(
     private dataHandlerService: DataHandlerService
@@ -45,6 +51,7 @@ export class AppComponent implements OnInit {
     ).subscribe((tasks: Task[]) => {
       this.tasks = tasks
     })
+    this.updateTasksAndStat()
   }
 
   onUpdateTask(task: Task) {
@@ -58,7 +65,7 @@ export class AppComponent implements OnInit {
         this.tasks = tasks
       })
     })
-
+    this.updateTasksAndStat()
   }
 
   onDeleteTask(task: Task) {
@@ -72,6 +79,7 @@ export class AppComponent implements OnInit {
         this.tasks = tasks
       })
     })
+    this.updateTasksAndStat()
   }
 
   onDeleteCategory(category: Category) {
@@ -131,4 +139,25 @@ export class AppComponent implements OnInit {
 
     this.dataHandlerService.searchCategory(title).subscribe(categories => this.categories = categories)
   }
+
+  updateTasksAndStat() {
+    this.updateTasks()
+
+    this.updateStat()
+  }
+
+  private updateStat() {
+    zip(
+      this.dataHandlerService.getTotalCountInCategory(this.selectedCategory),
+      this.dataHandlerService.getCompletedCountInCategory(this.selectedCategory),
+      this.dataHandlerService.getUncompletedCountInCategory(this.selectedCategory),
+      this.dataHandlerService.getUncompletedTotalCount()
+    ).subscribe(array => {
+      this.totalTasksCountInCategory = array[0]
+      this.completedCountInCategory = array[1]
+      this.uncompletedCountInCategory = array[2]
+      this.uncompletedTotalTasksCount = array[3]
+    })
+  }
+
 }
