@@ -26,7 +26,8 @@ import {registerLocaleData} from '@angular/common'
 import localeRu from '@angular/common/locales/ru'
 import {EditCategoryDialogComponent} from './dialog/edit-category-dialog/edit-category-dialog.component';
 import { HeaderComponent } from './views/header/header.component';
-import { StatisticComponent } from './views/statistic/statistic.component'
+import { StatisticComponent } from './views/statistic/statistic.component';
+import { StatisticCardComponent } from './views/statistic/statistic-card/statistic-card/statistic-card.component'
 
 registerLocaleData(localeRu)
 
@@ -40,7 +41,8 @@ registerLocaleData(localeRu)
     TaskDatePipe,
     EditCategoryDialogComponent,
     HeaderComponent,
-    StatisticComponent
+    StatisticComponent,
+    StatisticCardComponent
   ],
   imports: [
     BrowserModule,
