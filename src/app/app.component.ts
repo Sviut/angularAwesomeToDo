@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
   completedCountInCategory: number
   uncompletedCountInCategory: number
   private uncompletedTotalTasksCount: number
+  showStat: any
 
   constructor(
     private dataHandlerService: DataHandlerService
@@ -160,4 +161,7 @@ export class AppComponent implements OnInit {
     })
   }
 
+  toggleStat(showStat: boolean) {
+    this.showStat = showStat
+  }
 }

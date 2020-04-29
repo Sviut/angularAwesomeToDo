@@ -4,6 +4,9 @@
 
       <p class="navbar-brand">{{categoryName}}</p>
 
+      <p class="link navbar-brand" (click)="onToggleStat()" *ngIf="showStat">Скрыть статистику</p>
+      <p class="link navbar-brand" (click)="onToggleStat()" *ngIf="!showStat">Показать статистику</p>
+
     </div>
 
     <div class="col-2 text-right align-self-top">

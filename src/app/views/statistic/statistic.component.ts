@@ -13,6 +13,9 @@ export class StatisticComponent implements OnInit {
   @Input()
   uncompleteTasksInCategory: number
 
+  @Input()
+  showStat: boolean
+
   constructor() {
   }
 
