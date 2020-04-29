@@ -24,10 +24,14 @@ import {MatCheckboxModule} from '@angular/material/checkbox'
 
 import {registerLocaleData} from '@angular/common'
 import localeRu from '@angular/common/locales/ru'
-import {EditCategoryDialogComponent} from './dialog/edit-category-dialog/edit-category-dialog.component';
-import { HeaderComponent } from './views/header/header.component';
-import { StatisticComponent } from './views/statistic/statistic.component';
-import { StatisticCardComponent } from './views/statistic/statistic-card/statistic-card/statistic-card.component'
+import {EditCategoryDialogComponent} from './dialog/edit-category-dialog/edit-category-dialog.component'
+import {HeaderComponent} from './views/header/header.component'
+import {StatisticComponent} from './views/statistic/statistic.component'
+import {StatisticCardComponent} from './views/statistic/statistic-card/statistic-card/statistic-card.component'
+import {ColorPickerModule} from 'ngx-color-picker'
+import {SettingsDialogComponent} from './dialog/settings-dialog/settings-dialog.component'
+import {PrioritiesComponent} from './views/priorities/priorities.component'
+import {EditPriorityDialogComponent} from './dialog/edit-priority-dialog/edit-priority-dialog.component'
 
 registerLocaleData(localeRu)
 
@@ -42,7 +46,10 @@ registerLocaleData(localeRu)
     EditCategoryDialogComponent,
     HeaderComponent,
     StatisticComponent,
-    StatisticCardComponent
+    StatisticCardComponent,
+    SettingsDialogComponent,
+    PrioritiesComponent,
+    EditPriorityDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -60,13 +67,16 @@ registerLocaleData(localeRu)
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    ColorPickerModule
   ],
   providers: [],
   entryComponents: [
     EditTaskDialogComponent,
     ConfirmDialogComponent,
-    EditCategoryDialogComponent
+    EditCategoryDialogComponent,
+    SettingsDialogComponent,
+    EditPriorityDialogComponent
   ],
   bootstrap: [AppComponent]
 })

@@ -20,7 +20,6 @@ export class TaskDAOArray implements TaskDAO {
   }
 
   delete(id: number): Observable<Task> {
-    console.log(TestData.tasks.length)
     const tmpTask = TestData.tasks.find(t => t.id === id)
     TestData.tasks.splice(TestData.tasks.indexOf(tmpTask), 1)
     console.log(TestData.tasks.length)
