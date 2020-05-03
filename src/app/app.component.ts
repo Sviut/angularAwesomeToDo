@@ -29,11 +29,16 @@ export class AppComponent implements OnInit {
   uncompletedCountInCategory: number
   private uncompletedTotalTasksCount: number
   showStat: any
+  menuOpened: boolean
+  showBackdrop: boolean
+  menuPosition: string
+  menuMode: string
 
   constructor(
     private dataHandlerService: DataHandlerService,
     private introService: IntroService
   ) {
+    this.setMenuValues()
   }
 
   ngOnInit(): void {
@@ -168,5 +173,20 @@ export class AppComponent implements OnInit {
 
   toggleStat(showStat: boolean) {
     this.showStat = showStat
+  }
+
+  onClosedMenu() {
+    this.menuOpened = false
+  }
+
+  toggleMenu() {
+    this.menuOpened = !this.menuOpened
+  }
+
+  private setMenuValues() {
+    this.menuPosition = 'left'
+    this.menuOpened = true
+    this.menuMode = 'push'
+    this.showBackdrop = false
   }
 }
