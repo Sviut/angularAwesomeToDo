@@ -4,6 +4,7 @@ import {DataHandlerService} from './service/data-handler.service'
 import {Category} from './model/Category'
 import {Priority} from './model/Priority'
 import {zip} from 'rxjs'
+import {IntroService} from './service/intro.service'
 
 @Component({
   selector: 'app-root',
@@ -30,7 +31,8 @@ export class AppComponent implements OnInit {
   showStat: any
 
   constructor(
-    private dataHandlerService: DataHandlerService
+    private dataHandlerService: DataHandlerService,
+    private introService: IntroService
   ) {
   }
 
@@ -39,6 +41,9 @@ export class AppComponent implements OnInit {
     this.dataHandlerService.getAllCategories().subscribe(categories => this.categories = categories)
 
     this.onSelectCategory(null)
+
+    this.introService.startIntroJS(true)
+
   }
 
   onSelectCategory(category: Category) {

@@ -1,15 +1,24 @@
 <div class="wrapper ">
-  <app-categories
-    (selectCategory)="onSelectCategory($event)"
-    [categories]="categories"
-    [selectedCategory]="selectedCategory"
-    (addCategory)="onAddCategory($event)"
-    (searchCategory)="onSearchCategory($event)"
 
-    (deleteCategory)="onDeleteCategory($event)"
-    (updateCategory)="onUpdateCategory($event)"
+  <div
+    class="sidebar"
+    data-color="purple"
+    data-step="1"
+    data-intro="Фильтрация задач, добавление/удаление/редактирование категорий"
+    data-position="right"
+  >
+    <app-categories
+      (selectCategory)="onSelectCategory($event)"
+      [categories]="categories"
+      [selectedCategory]="selectedCategory"
+      (addCategory)="onAddCategory($event)"
+      (searchCategory)="onSearchCategory($event)"
 
-  ></app-categories>
+      (deleteCategory)="onDeleteCategory($event)"
+      (updateCategory)="onUpdateCategory($event)"
+
+    ></app-categories>
+  </div>
 
   <div class="main-panel">
     <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
@@ -25,30 +34,41 @@
     <div class="content">
       <div class="container-fluid">
 
-        <app-statistic
-          [completeTasksInCategory]="completedCountInCategory"
-          [totalTasksInCategory]="totalTasksCountInCategory"
-          [uncompleteTasksInCategory]="uncompletedCountInCategory"
-          [showStat]="showStat"
-        ></app-statistic>
+        <div data-color="purple"
+             data-step="2"
+             data-intro="Статистика задач"
+             data-position="bottom">
+          <app-statistic
+            [completeTasksInCategory]="completedCountInCategory"
+            [totalTasksInCategory]="totalTasksCountInCategory"
+            [uncompleteTasksInCategory]="uncompletedCountInCategory"
+            [showStat]="showStat"
+          ></app-statistic>
+
+        </div>
+
 
         <div class="row">
           <div class="col-12">
+            <div data-color="purple"
+                 data-step="3"
+                 data-intro="Список задач"
+                 data-position="top">
+              <app-tasks
+                (updateTask)="onUpdateTask($event)"
+                (deleteTask)="onDeleteTask($event)"
+                (selectCategory)="onSelectCategory($event)"
+                (addTask)="onAddTask($event)"
 
-            <app-tasks
-              (updateTask)="onUpdateTask($event)"
-              (deleteTask)="onDeleteTask($event)"
-              (selectCategory)="onSelectCategory($event)"
-              (addTask)="onAddTask($event)"
+                (filterByStatus)="onFilterTasksByStatus($event)"
+                (filterByTitle)="onSearchTasks($event)"
+                (filterByPriority)="onFilterTasksByPriority($event)"
 
-              (filterByStatus)="onFilterTasksByStatus($event)"
-              (filterByTitle)="onSearchTasks($event)"
-              (filterByPriority)="onFilterTasksByPriority($event)"
-
-              [priorities]="priorities"
-              [tasks]="tasks"
-              [selectedCategory]="selectedCategory"
-            ></app-tasks>
+                [priorities]="priorities"
+                [tasks]="tasks"
+                [selectedCategory]="selectedCategory"
+              ></app-tasks>
+            </div>
 
           </div>
         </div>
